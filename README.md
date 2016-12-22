@@ -15,9 +15,8 @@ textTyper.removeWord(Element ID, Characters to remain, Speed in ms)
    ex: textTyper.removeWord('my-div-id',12,300);
    
 ##Add a string and then remove it after pausing for a moment
-textTyper.addAndDeleteWord(Element ID, Text to be added and removed, Speed in ms,Delay in ms)
+textTyper.addAndDeleteWord(Element ID,Text to be added removed, Speed in ms,Delay in ms)
    ex: textTyper.addAndDeleteWord('my-div-id',"Add and remove this text",400,600);
-   *Will add a word at speed 400, wait 600, and then delete at speed 400*
    
 ##Add and remove an array of strings
 textTyper.wordsArray(Element ID, String Array, Speed in ms)
