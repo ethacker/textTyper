@@ -7,17 +7,17 @@ Javascript library to simulate the visual effect of words being typed.
 
 #Usage
 ##Add a single string
-textTyper.addWord(Element ID, Text to be added, Speed in ms)
+###textTyper.addWord(Element ID, Text to be added, Speed in ms)
    ex: textTyper.addWord('my-div-id','Add this text', 500);
 
 ##Remove a number of characters from the end
-textTyper.removeWord(Element ID, Characters to remain, Speed in ms)
+###textTyper.removeWord(Element ID, Characters to remain, Speed in ms)
    ex: textTyper.removeWord('my-div-id',12,300);
    
 ##Add a string and then remove it after pausing for a moment
-textTyper.addAndDeleteWord(Element ID,Text to be added removed, Speed in ms,Delay in ms)
+###textTyper.addAndDeleteWord(Element ID,Text to be added removed, Speed in ms,Delay in ms)
    ex: textTyper.addAndDeleteWord('my-div-id',"Add and remove this text",400,600);
    
 ##Add and remove an array of strings
-textTyper.wordsArray(Element ID, String Array, Speed in ms)
+###textTyper.wordsArray(Element ID, String Array, Speed in ms)
    ex: textTyper.wordsArray('my-div-id',['first','second','third'],500)
