@@ -4,6 +4,7 @@ var textTyper = {
 		var i =0;
 		var baseText = element.firstChild.nodeValue;
 		var cursor = textTyper.generateCursor(element);
+		cursor.style.opacity=1;
 		var addLetter = function(i){
 			if(word.length<=i++) {
 				element.removeChild(cursor);
@@ -16,13 +17,13 @@ var textTyper = {
 			element.appendChild(cursor);
 			var rand = (Math.random()+0.5)*speed;
 			setTimeout(function () {addLetter(i)},rand);
-			setTimeout(function(){cursor.style.opacity=1-cursor.style.opacity},250);
 		};
 		addLetter(i);
 	},
 	deleteWords: function(characterCount,element,speed){
 		var i=element.firstChild.nodeValue.length;
 		var cursor = textTyper.generateCursor(element);
+		cursor.style.opacity=1;
 		var removeLetter =function(i){
 			if(i--<=characterCount){
 				element.removeChild(cursor);
@@ -32,7 +33,6 @@ var textTyper = {
 			element.appendChild(cursor);
 			var rand = (Math.random()+0.2)*speed;
 			setTimeout(function(){removeLetter(i)},rand);
-			setTimeout(function(){cursor.style.opacity=1-cursor.style.opacity},250);
 			return;
 		};
 		removeLetter(i);
@@ -69,7 +69,7 @@ var textTyper = {
 					textTyper.addAndDeleteWord(id,word,speed,1000);
 					i++;
 					nextWord();
-				},secondarySpeed*delay);
+				},secondarySpeed*(delay));
 			}
 		}
 		textTyper.addAndDeleteWord(id,words[i],speed,600);
