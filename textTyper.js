@@ -1,9 +1,10 @@
-textTyper = {
+'use strict';
+var textTyper = {
 	typeWord: function(word,element,speed,callback){
 		var i =0;
 		var baseText = element.firstChild.nodeValue;
 		var cursor = textTyper.generateCursor(element);
-		addLetter = function(i){
+		var addLetter = function(i){
 			if(word.length<=i++) {
 				element.removeChild(cursor);
 				if(callback){
@@ -21,8 +22,8 @@ textTyper = {
 	},
 	deleteWords: function(characterCount,element,speed){
 		var i=element.firstChild.nodeValue.length;
-		cursor = textTyper.generateCursor(element);
-		removeLetter =function(i){
+		var cursor = textTyper.generateCursor(element);
+		var removeLetter =function(i){
 			if(i--<=characterCount){
 				element.removeChild(cursor);
 				return;
@@ -47,13 +48,13 @@ textTyper = {
 		return cursorLine;
 	},
 	addWord:function(id,word,speed){
-			textTyper.typeWord(word,document.getElementById(id),speed);
+		textTyper.typeWord(word,document.getElementById(id),speed);
 	},
 	removeWord:function(id,count,speed){
 		textTyper.deleteWords(count,document.getElementById(id),speed);
 	},
 	wordsArray:function(id,words,speed){
-		element = document.getElementById(id);
+		var element = document.getElementById(id);
 		var i=0;
 		var secondarySpeed=0;
 		words.forEach(function(text){
@@ -61,7 +62,7 @@ textTyper = {
 		});
 		secondarySpeed=secondarySpeed/(words.length);
 		console.log(secondarySpeed);
-		function nextWord(){
+		var nextWord = function(){
 			if(i<words.length) {
 				var word = words[i];
 				setTimeout(function(){
@@ -76,9 +77,9 @@ textTyper = {
 		nextWord();
 	},
 	addAndDeleteWord:function(id,word,speed,delay) {
-		element = document.getElementById(id);
-		length = element.firstChild.nodeValue.length;
-		deleteWait = function(i,l,s){
+		var element = document.getElementById(id);
+		var length = element.firstChild.nodeValue.length;
+		var deleteWait = function(i,l,s){
 			setTimeout(function(){textTyper.removeWord(i,l,s)},delay);
 		};
 		textTyper.typeWord(word,element,speed,function(){deleteWait(id,length,speed)});
