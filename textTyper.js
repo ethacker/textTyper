@@ -1,36 +1,51 @@
 'use strict';
 var textTyper = {
-	typeWord: function(word,element,speed,callback){
+	typeWord: function(word,element,cursor,speed,callback){
 		var i =0;
 		var baseText = element.firstChild.nodeValue;
-		var cursor = textTyper.generateCursor(element);
-		cursor.style.opacity=1;
+		if(cursor){
+			var cursor = textTyper.generateCursor(element);
+			cursor.style.opacity=1;
+		}
 		var addLetter = function(i){
 			if(word.length<=i++) {
-				element.removeChild(cursor);
+				if(cursor){
+					element.removeChild(cursor);
+				}
 				if(callback){
 					callback();
 				}
 				return;
 			}
 			element.firstChild.nodeValue= baseText+word.substr(0,i);
-			element.appendChild(cursor);
+			if(cursor){
+				element.appendChild(cursor);
+			}
 			var rand = (Math.random()+0.5)*speed;
 			setTimeout(function () {addLetter(i)},rand);
 		};
 		addLetter(i);
 	},
-	deleteWords: function(characterCount,element,speed){
+	deleteWords: function(characterCount,element,cursor,speed,callback){
 		var i=element.firstChild.nodeValue.length;
-		var cursor = textTyper.generateCursor(element);
-		cursor.style.opacity=1;
+		if(cursor){
+			var cursor = textTyper.generateCursor(element);
+			cursor.style.opacity=1;
+		}
 		var removeLetter =function(i){
 			if(i--<=characterCount){
-				element.removeChild(cursor);
+				if(cursor){
+					element.removeChild(cursor);
+				}
+				if(callback){
+					callback();
+				}
 				return;
 			}
 			element.firstChild.nodeValue=element.firstChild.nodeValue.substr(0,i);
-			element.appendChild(cursor);
+			if(cursor){
+				element.appendChild(cursor);
+			}
 			var rand = (Math.random()+0.2)*speed;
 			setTimeout(function(){removeLetter(i)},rand);
 			return;
@@ -47,14 +62,13 @@ var textTyper = {
 		cursorLine.style.transition = 'opacity 0.1s';
 		return cursorLine;
 	},
-	addWord:function(id,word,speed){
-		textTyper.typeWord(word,document.getElementById(id),speed);
+	addWord:function(id,word,cursor,speed,callback){
+		textTyper.typeWord(word,document.getElementById(id),cursor,speed,callback);
 	},
-	removeWord:function(id,count,speed){
-		textTyper.deleteWords(count,document.getElementById(id),speed);
+	removeWord:function(id,count,cursor,speed,callback){
+		textTyper.deleteWords(count,document.getElementById(id),cursor,speed,callback);
 	},
-	wordsArray:function(id,words,speed,delay){
-		var element = document.getElementById(id);
+	wordsArray:function(id,words,cursor,speed,delay){
 		var i=0;
 		var secondarySpeed=0;
 		words.forEach(function(text){
@@ -66,22 +80,22 @@ var textTyper = {
 			if(i<words.length) {
 				var word = words[i];
 				setTimeout(function(){
-					textTyper.addAndDeleteWord(id,word,speed,1000);
+					textTyper.addAndDeleteWord(id,word,cursor,speed,1000);
 					i++;
 					nextWord();
 				},secondarySpeed*(delay));
 			}
 		}
-		textTyper.addAndDeleteWord(id,words[i],speed,600);
+		textTyper.addAndDeleteWord(id,words[i],cursor,speed,600);
 		i++;
 		nextWord();
 	},
-	addAndDeleteWord:function(id,word,speed,delay) {
+	addAndDeleteWord:function(id,word,cursor,speed,delay) {
 		var element = document.getElementById(id);
 		var length = element.firstChild.nodeValue.length;
 		var deleteWait = function(i,l,s){
-			setTimeout(function(){textTyper.removeWord(i,l,s)},delay);
+			setTimeout(function(){textTyper.removeWord(i,l,cursor,s)},delay);
 		};
-		textTyper.typeWord(word,element,speed,function(){deleteWait(id,length,speed)});
+		textTyper.typeWord(word,element,cursor,speed,function(){deleteWait(id,length,speed)});
 	}
 };
