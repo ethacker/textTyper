@@ -65,10 +65,10 @@ textTyper = {
 			if(i<words.length) {
 				var word = words[i];
 				setTimeout(function(){
-					textTyper.addAndDeleteWord(id,word,speed,600);
+					textTyper.addAndDeleteWord(id,word,speed,1000);
 					i++;
 					nextWord();
-				},secondarySpeed*(700));
+				},secondarySpeed*(750));
 			}
 		}
 		textTyper.addAndDeleteWord(id,words[i],speed,600);
