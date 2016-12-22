@@ -53,7 +53,7 @@ var textTyper = {
 	removeWord:function(id,count,speed){
 		textTyper.deleteWords(count,document.getElementById(id),speed);
 	},
-	wordsArray:function(id,words,speed){
+	wordsArray:function(id,words,speed,delay){
 		var element = document.getElementById(id);
 		var i=0;
 		var secondarySpeed=0;
@@ -69,7 +69,7 @@ var textTyper = {
 					textTyper.addAndDeleteWord(id,word,speed,1000);
 					i++;
 					nextWord();
-				},secondarySpeed*(750));
+				},secondarySpeed*delay);
 			}
 		}
 		textTyper.addAndDeleteWord(id,words[i],speed,600);
